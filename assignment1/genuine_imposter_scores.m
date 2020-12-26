@@ -1,4 +1,4 @@
-function genuine= genuine_imposter_scores
+function genuine_imposter_scores
 % gather data
 [S, Id] = get_scores_from_file
 [~, size_ids] = size(Id)
@@ -29,6 +29,21 @@ for i = 1:size_ids
     end
     
 end
+
+figure(1);
+[counts, centers] = hist(genuine, 50);
+disp(counts)
+
+figure(2);
+[counts_2, centers_2] = hist(imposter, centers);
+
+disp(counts_2)
+
+disp(centers)
+disp(centers_2)
+
+figure(3);
+bar(centers, [counts; counts_2])
 
 fprintf("size_genuine: %u\n", size(genuine))
 fprintf("size_imposter: %u\n", size(imposter))
