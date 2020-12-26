@@ -1,4 +1,4 @@
-function imposter= genuine_imposter_scores
+function genuine= genuine_imposter_scores
 % gather data
 [S, Id] = get_scores_from_file
 [~, size_ids] = size(Id)
