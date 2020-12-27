@@ -1,4 +1,4 @@
-function genuine_imposter_scores
+function [genuine, imposter] = genuine_imposter_scores
 % gather data
 [S, Id] = get_scores_from_file
 [~, size_ids] = size(Id)
@@ -31,13 +31,14 @@ for i = 1:size_ids
 end
 
 % generate image with hist counts of imposted & genuine scores
-range = -1600:5:400;
+binsize = 5
+range = -1600:binsize:400;
 counts_genuine = histcounts(genuine, [range Inf]);
 counts_imposter = histcounts(imposter, [range Inf]);
 
 figure(1);
 bar(range, [counts_genuine; counts_imposter])
+xlabel('Score'); ylabel('Number of results'); title('Genuine & Imposter score density');
 
-fprintf("size_genuine: %u\n", size(genuine))
-fprintf("size_imposter: %u\n", size(imposter))
-fprintf("genuine_1 %u\n", genuine(1))
+
+
