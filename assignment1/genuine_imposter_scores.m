@@ -31,7 +31,7 @@ for i = 1:size_ids
 end
 
 % generate image with hist counts of imposted & genuine scores
-binsize = 5
+binsize = 2;
 range = -1600:binsize:400;
 counts_genuine = histcounts(genuine, [range Inf]);
 counts_imposter = histcounts(imposter, [range Inf]);
@@ -39,6 +39,3 @@ counts_imposter = histcounts(imposter, [range Inf]);
 figure(1);
 bar(range, [counts_genuine; counts_imposter])
 xlabel('Score'); ylabel('Number of results'); title('Genuine & Imposter score density');
-
-
-

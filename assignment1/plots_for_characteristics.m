@@ -8,7 +8,7 @@
 % persons.
 
 min_score = -1600;
-max_score = 500;
+max_score = 400;
 
 false_match_rate = [];
 false_non_match_rate = [];
