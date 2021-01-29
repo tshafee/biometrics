@@ -7,17 +7,20 @@
 % same person.... when score is low (exp -500) then its probably different
 % persons.
 
-min_score = -1600
-max_score = 500
+min_score = -1600;
+max_score = 500;
 
-false_match_rate = []
+false_match_rate = [];
+false_non_match_rate = [];
 [~, size_ids] = size(Id)
-thresholds = []
+thresholds = [];
 for t = min_score:max_score
     thresholds = [thresholds, t];
     % compute match rate for threshold i
-    count_of_checks = 0;
+    count_of_checks_match = 0;
+    count_of_checks_non_match = 0;
     count_of_FM = 0;
+    count_of_FNM = 0;
     
     for i = 1:size_ids
         % get identity for this index
@@ -26,22 +29,32 @@ for t = min_score:max_score
             compare_id = Id(j);
             if temp_id == compare_id
                 %same person
-                count_of_checks = count_of_checks + 1;
+                count_of_checks_match = count_of_checks_match + 1;
+                if S(temp_id, compare_id) < t
+                   count_of_FNM = count_of_FNM + 1; 
+                end
             else
                 %not same person
-                count_of_checks = count_of_checks + 1;
-                if S(temp_id,compare_id) > t
+                count_of_checks_non_match = count_of_checks_non_match + 1;
+                if S(temp_id,compare_id) >= t
                     count_of_FM = count_of_FM + 1;
                 end
             end
         end
     end
     
-    fmr = count_of_FM/count_of_checks;
+    fmr = count_of_FM/count_of_checks_non_match;
+    fnmr = count_of_FNM/count_of_checks_match;
     
     false_match_rate = [false_match_rate, fmr];
+    false_non_match_rate = [false_non_match_rate, fnmr];
 end
 
 plot(thresholds, false_match_rate)
-xlabel('Threshold t'); ylabel('pdf'); title('False match rate');
+hold on;
+plot(thresholds, false_non_match_rate)
+xlabel('Threshold t'); ylabel('pdf'); title('False match & non-match rates');
+
+
+
 
