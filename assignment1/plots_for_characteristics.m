@@ -1,7 +1,5 @@
 [S, Id] = get_scores_from_file
 
-result = S(1,8)
-
 % The list of Ids shows the id of the person that did the enty (for example
 % first 8 entries are same person (see id list)
 % S(x,y) returns the similiarity of entry x compared to enty y.
@@ -16,10 +14,10 @@ false_match_rate = []
 [~, size_ids] = size(Id)
 thresholds = []
 for t = min_score:max_score
-    thresholds = [thresholds, t]
+    thresholds = [thresholds, t];
     % compute match rate for threshold i
-    count_of_checks = 0
-    count_of_FM = 0
+    count_of_checks = 0;
+    count_of_FM = 0;
     
     for i = 1:size_ids
         % get identity for this index
@@ -44,4 +42,6 @@ for t = min_score:max_score
     false_match_rate = [false_match_rate, fmr];
 end
 
-plot(false_match_rate, thresholds)
+plot(thresholds, false_match_rate)
+xlabel('Threshold t'); ylabel('pdf'); title('False match rate');
+
