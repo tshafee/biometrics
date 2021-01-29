@@ -59,11 +59,15 @@ plot(thresholds, false_non_match_rate)
 xlabel('Threshold t'); ylabel('pdf'); title('False match & non-match rates');
 
 figure(2); % DET
-plot(false_match_rate, false_non_match_rate)
+plot(false_match_rate, false_non_match_rate)    
+% set(gca, 'YScale', 'log')
+% set(gca, 'XScale', 'log')
 xlabel('False match rate FMR(t)'); ylabel('False non-match rate FNMR(t)'); title('Decision error trade-off curve (DET)');
 
 figure(3); % ROC
 plot(false_match_rate, true_match_rate)
+% set(gca, 'YScale', 'log')
+% set(gca, 'XScale', 'log')
 xlabel('False match rate FMR(t)'); ylabel('True match rate TMR(t)'); title('Receiver operating characteristic (ROC)');
 
 
