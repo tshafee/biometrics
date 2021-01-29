@@ -12,6 +12,7 @@ max_score = 500;
 
 false_match_rate = [];
 false_non_match_rate = [];
+true_match_rate = []
 [~, size_ids] = size(Id)
 thresholds = [];
 for t = min_score:max_score
@@ -48,6 +49,7 @@ for t = min_score:max_score
     
     false_match_rate = [false_match_rate, fmr];
     false_non_match_rate = [false_non_match_rate, fnmr];
+    true_match_rate = [true_match_rate, 1-fnmr];
 end
 
 figure(1); % FMR & FNMR
@@ -60,6 +62,8 @@ figure(2); % DET
 plot(false_match_rate, false_non_match_rate)
 xlabel('False match rate FMR(t)'); ylabel('False non-match rate FNMR(t)'); title('Decision error trade-off curve (DET)');
 
-
+figure(3); % ROC
+plot(false_match_rate, true_match_rate)
+xlabel('False match rate FMR(t)'); ylabel('True match rate TMR(t)'); title('Receiver operating characteristic (ROC)');
 
 
