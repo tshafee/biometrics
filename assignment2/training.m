@@ -56,5 +56,8 @@ for i = 1:d
       break;
   end
 end
+
+figure(1);
 plot(v)
+xlabel('m'); ylabel('v(m)'); title('distribution of v(m)');
 
