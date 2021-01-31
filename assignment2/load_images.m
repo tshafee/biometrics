@@ -18,8 +18,8 @@ for i_user = 1:n_users
 end
 
 % create test and training set
-Xtr = zeros(n_users*(images_per_user/2), p*q); % pixel_vectors_training
-Xte = zeros(n_users*(images_per_user/2), p*q); % pixel_vectors_test
+Xtr = zeros(p*q, n_users*(images_per_user/2)); % pixel_vectors_training
+Xte = zeros(p*q, n_users*(images_per_user/2)); % pixel_vectors_test
 pixel_vector_test_identities = [];
 Xtr_i = 0;
 Xte_i = 0;
@@ -31,16 +31,16 @@ for i_user = 1:n_users
       if i_image <= images_per_user/2
           Xtr_i = Xtr_i + 1;
           temp_val = pixel_vectors(i_user, i_image);
-          Xtr(Xtr_i,:) = temp_val{1,1};
+          Xtr(:,Xtr_i) = temp_val{1,1};
       else
           Xte_i = Xte_i + 1;
           temp_val = pixel_vectors(i_user, i_image);
-          Xte(Xte_i,:) = temp_val{1,1};
+          Xte(:,Xte_i) = temp_val{1,1};
           pixel_vector_test_identities(Xte_i) = i_user;
       end
    end
 end
 
 % access elements like this
-%a = Xtr(5,:)
+%a = Xtr(:,5)
 % value of 5 could be between 1 and 200(=n_users*images_per_user/2)
