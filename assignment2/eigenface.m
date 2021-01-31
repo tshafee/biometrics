@@ -16,5 +16,5 @@ for i = 1:d
     
     figure(i+1);
     imagesc(image);
-    title("face #" + i + "  -  Lambda: " + lambda_m(i))
+    title("face #" + i + "  -  Eigenvalue: " + lambda_m(i))
 end
