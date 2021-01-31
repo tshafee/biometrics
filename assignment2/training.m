@@ -29,11 +29,11 @@ phi = phi(:,ind);
 %training step 7
 m = 10; % 10 items
 [n_1, n_2] = size(phi);
-phi_m = zeros(n_1, m);
+phi_m = zeros(m,n_1);
 phi_index = 1;
 lambda_m = [];
 for i = n_2:-1:n_2-m+1
-    phi_m(:,phi_index) = phi(:,i);
+    phi_m(phi_index,:) = phi(:,i);
     lambda_m(phi_index) = lambda(i);
     phi_index = phi_index+1;
 end
