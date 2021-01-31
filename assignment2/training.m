@@ -1,4 +1,6 @@
-function [phi_m, lambda_m] = training
+function [phi_m, lambda_m, phi_0] = training
+% configuration: m
+m = 10; % 10 items
 
 %training step 2
 [Xtr, ~, ~] = load_images;
@@ -27,7 +29,6 @@ lambda = diag(lambda);
 phi = phi(:,ind);
 
 %training step 7
-m = 10; % 10 items
 [n_1, n_2] = size(phi);
 phi_m = zeros(m,n_1);
 phi_index = 1;
@@ -41,3 +42,5 @@ end
 % access elements like this
 %a = Xtr(:,5)
 % value of 5 could be between 1 and 200(=n_users*images_per_user/2)
+
+
