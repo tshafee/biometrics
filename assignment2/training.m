@@ -1,4 +1,4 @@
-function [phi_0] = training
+function [X_0] = training
 
 %training step 2
 [Xtr, ~, ~] = load_images;
@@ -7,6 +7,14 @@ function [phi_0] = training
 phi_0 = mean(Xtr); % avg
 
 %training step 4
+[d, n] = size(Xtr);
+X_0 = zeros(d, n); %zero-mean training matrix
+
+
+
+
+
+%training step 5
 
 
 
