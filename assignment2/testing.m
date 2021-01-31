@@ -35,7 +35,7 @@ end
 % calculate ROC
 false_match_rate = [];
 false_non_match_rate = [];
-true_match_rate = []
+true_match_rate = [];
 thresholds = [];
 for t = 0:0.2:10
     thresholds = [thresholds, t];
@@ -73,9 +73,19 @@ for t = 0:0.2:10
     false_non_match_rate = [false_non_match_rate, fnmr];
     true_match_rate = [true_match_rate, double(1-fnmr)];
 end
+[~, entries] = size(thresholds);
 
+EER_Threshold_id = entries;
+for i=1:entries
+    fnmr = false_non_match_rate(i);
+    fmr = false_match_rate(i);
+    if fmr >= fnmr
+       EER_Threshold = i;
+       break;
+    end
+end
 
 figure(1); % ROC
 plot(false_match_rate, true_match_rate)
-xlabel('False match rate FMR(t)'); ylabel('True match rate TMR(t)'); title('Receiver operating characteristic (ROC)');
+xlabel('False match rate FMR(t)'); ylabel('True match rate TMR(t)'); title("ROC (EER: " + false_match_rate(EER_Threshold) + " at threshold: " + thresholds(EER_Threshold) + ")");
 
