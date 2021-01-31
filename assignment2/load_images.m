@@ -6,7 +6,7 @@ load('FaceData.mat', '-mat', 'FaceData');
 [n_users, images_per_user] = size(FaceData);
 
 % size of image
-[p,q] = size(FaceData(1,1).Image)
+[p,q] = size(FaceData(1,1).Image);
 
 %pixel 
 pixel_vectors = cell(n_users, images_per_user);
@@ -18,26 +18,27 @@ for i_user = 1:n_users
 end
 
 % create test and training set
-Xtr = zeros(n_users*(images_per_user/2), p*q); % pixel_vectors_training
-Xte = zeros(n_users*(images_per_user/2), p*q); % pixel_vectors_test
+Xtr = zeros((n_users/2)*images_per_user, p*q); % pixel_vectors_training
+Xte = zeros((n_users/2)*images_per_user, p*q); % pixel_vectors_test
 pixel_vector_test_identities = [];
 Xtr_i = 0;
 Xte_i = 0;
 
 % training: all users images 1-5
 % test: all users images 6-10
-for i_user = 1:n_users
+for i_user = 1:n_users/2
    for i_image = 1:images_per_user
-      if i_image <= images_per_user/2
-          Xtr_i = Xtr_i + 1;
-          temp_val = pixel_vectors(i_user, i_image);
-          Xtr(Xtr_i,:) = temp_val{1,1};
-      else
-          Xte_i = Xte_i + 1;
-          temp_val = pixel_vectors(i_user, i_image);
-          Xte(Xte_i,:) = temp_val{1,1};
-          pixel_vector_test_identities(Xte_i) = i_user;
-      end
+      Xtr_i = Xtr_i + 1;
+      temp_val = pixel_vectors(i_user, i_image);
+      Xtr(Xtr_i,:) = temp_val{1,1};
+   end
+end
+for i_user = (n_users/2)+1:n_users
+    for i_image = 1:images_per_user
+      Xte_i = Xte_i + 1;
+      temp_val = pixel_vectors(i_user, i_image);
+      Xte(Xte_i,:) = temp_val{1,1};
+      pixel_vector_test_identities(Xte_i) = i_user;
    end
 end
 
