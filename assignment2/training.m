@@ -7,9 +7,9 @@ function [X_0] = training
 phi_0 = mean(Xtr); % avg
 
 %training step 4
-[d, n] = size(Xtr);
-X_0 = zeros(d, n); %zero-mean training matrix
-for i = 1:d
+[n, d] = size(Xtr);
+X_0 = zeros(n, d); %zero-mean training matrix
+for i = 1:n
     X_0(i,:) = Xtr(i,:)-phi_0;
 end
 
