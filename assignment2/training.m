@@ -13,10 +13,12 @@ for i = 1:n
     X_0(i,:) = Xtr(i,:)-phi_0;
 end
 
-
-
 %training step 5
+sigma = cov(X_0); %covariance of zero-mean training matrix
 
+
+
+%training step 6
 
 
 
