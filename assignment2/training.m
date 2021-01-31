@@ -1,4 +1,4 @@
-function [phi] = training
+function [phi_m, lambda_m] = training
 
 %training step 2
 [Xtr, ~, ~] = load_images;
@@ -27,7 +27,16 @@ lambda = diag(lambda);
 phi = phi(:,ind);
 
 %training step 7
-
+m = 10; % 10 items
+[n_1, n_2] = size(phi);
+phi_m = zeros(n_1, m);
+phi_index = 1;
+lambda_m = [];
+for i = n_2:-1:n_2-m+1
+    phi_m(:,phi_index) = phi(:,i);
+    lambda_m(phi_index) = lambda(i);
+    phi_index = phi_index+1;
+end
 
 % access elements like this
 %a = Xtr(:,5)
