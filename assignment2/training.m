@@ -1,4 +1,4 @@
-function [X_0] = training
+function [phi] = training
 
 %training step 2
 [Xtr, ~, ~] = load_images;
@@ -19,7 +19,14 @@ sigma = cov(X_0); %covariance of zero-mean training matrix
 
 
 %training step 6
+% reference https://nl.mathworks.com/help/matlab/ref/eig.html
+[phi,lambda] = eig(sigma); % phi=eigenvector, lambda=eigenvalues
+[d,ind] = sort(diag(lambda));
+lambda = lambda(ind,ind);
+lambda = diag(lambda);
+phi = phi(:,ind);
 
+%training step 7
 
 
 % access elements like this
