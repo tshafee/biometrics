@@ -39,8 +39,22 @@ for i = n_2:-1:n_2-m+1
     phi_index = phi_index+1;
 end
 
-% access elements like this
-%a = Xtr(:,5)
-% value of 5 could be between 1 and 200(=n_users*images_per_user/2)
+% Task 2: plot v(m)
 
+flipped_lambda = flip(lambda);
+d = 2576;
+sum_d = 0;
+v = [];
+for i=1:d
+   sum_d = sum_d + flipped_lambda(i);
+end
+sum_m = 0;
+for i = 1:d
+  sum_m = sum_m + flipped_lambda(i);
+  v(i) = double(sum_m/sum_d);
+  if v(i) >= 1.0
+      break;
+  end
+end
+plot(v)
 
