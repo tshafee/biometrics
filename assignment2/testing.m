@@ -7,12 +7,18 @@ function [A] = testing
 [phi_m, lambda_m, phi_0] = training;
 
 %zero-mean testing matrix -> calculate x_i-u for all i
-[n, d] = size(Xte);
-X_0 = zeros(n, d); 
-for i = 1:n
+[l, d] = size(Xte);
+X_0 = zeros(l, d); 
+for i = 1:l
     X_0(i,:) = -Xte(i,:)-phi_0;
 end
 
 % calculate a_i for all i
-transposed_phi_m = transpose(phi_m);
-transposed_phi_m(X_0(1,:))
+[m, d] = size(phi_m)
+A = zeros(l,m)
+for i = 1:l
+   A(i,:) =  phi_m*transpose(X_0(i,:));
+end
+% size(phi_m)
+% size(transpose(X_0(1,:)))
+% phi_m*transpose(X_0(1,:))
